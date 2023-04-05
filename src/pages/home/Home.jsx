@@ -1,4 +1,4 @@
-import HeroBanner from "./heroBanner/heroBanner";
+import HeroBanner from "./heroBanner/HeroBanner";
 import "./style.scss";
 import React from "react";
 import Trending from "./trending/Trending";
