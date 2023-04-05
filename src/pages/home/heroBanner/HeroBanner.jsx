@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./style.scss";
+
 import useFetch from "../../../hooks/useFetch";
-import Img from "../../../hooks/useFetch";
+
+import Img from "../../../components/lazyLoadImage/Img";
 import ContentWrapper from "../../../components/contentWrapper/ContentWrapper";
 
 const HeroBanner = () => {
@@ -11,8 +13,8 @@ const HeroBanner = () => {
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
   const { url } = useSelector((state) => state.home);
-
   const { data, loading } = useFetch("/movie/upcoming");
+
   useEffect(() => {
     const bg =
       url.backdrop +
@@ -25,31 +27,32 @@ const HeroBanner = () => {
       navigate(`/search/${query}`);
     }
   };
+
   return (
     <div className="heroBanner">
-      {!loading && 
+      {!loading && (
         <div className="backdrop-img">
-          <img src={background} />
+          <Img src={background} />
         </div>
-      }
-      <div className="opacity-layer"></div>
+      )}
 
+      <div className="opacity-layer"></div>
       <ContentWrapper>
-          <div className="heroBannerContent">
-            <span className="title">Welcome</span>
-            <span className="subTitle">
-              Millions of movies, TV shows and people to discover. Explore now.
-            </span>
-            <div className="searchInput">
-              <input
-                type="text"
-                placeholder="Search for a movie or Tv Show..."
-                onChange={(e) => setQuery(e.target.value)}
-                onKeyUp={searchQueryHandler}
-              />
-              <button>Search</button>
-            </div>
+        <div className="heroBannerContent">
+          <span className="title">Welcome.</span>
+          <span className="subTitle">
+            Millions of movies, TV shows and people to discover. Explore now.
+          </span>
+          <div className="searchInput">
+            <input
+              type="text"
+              placeholder="Search for a movie or tv show...."
+              onChange={(e) => setQuery(e.target.value)}
+              onKeyUp={searchQueryHandler}
+            />
+            <button>Search</button>
           </div>
+        </div>
       </ContentWrapper>
     </div>
   );
